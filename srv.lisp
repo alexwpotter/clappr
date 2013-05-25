@@ -1,1 +1,10 @@
-
+(let ((server (socket:socket-server 80)))
+	(unwind-protect
+		(loop (with-open-stream (socket (socket:socket-accept server))
+			(multiple-value-bind (local-host local-port) (socket:socket-stream-peer socket))
+			(loop (when (eq :eof (socket:socket-status (cons socket :input))) (return))
+				(print (eval (read socket)) socket)
+				(print (read-line socket))
+				(loop :for c = (read-char-no-hang socket nil nil) :while c)
+				(terpri socket))))
+	(socket:socket-server-close server)))

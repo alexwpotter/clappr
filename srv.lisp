@@ -1,3 +1,10 @@
+(load "html.lisp")
+(use-package html)
+(defun ex (file)
+(let ((in (open file)))
+        (eval (read-line in))
+        (close in)))
+
 (let ((server (socket:socket-server 80)))
 	(unwind-protect
 		(loop (with-open-stream (socket (socket:socket-accept server))

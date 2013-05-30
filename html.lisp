@@ -3,7 +3,7 @@
 ;;; $Header: /home/gene/library/website/docsrc/lh/RCS/html-opti.lisp,v 395.1 2008/04/20 17:25:45 gene Exp $
 ;;;
 
-(defpackage html
+(defpackage html_pkg
   (:use "COMMON-LISP")
   (:export "ANCHOR"
      "BODY"
@@ -29,7 +29,7 @@
      "TH"
      "TR"
      "UL"))
-(in-package html)
+(in-package html_pkg)
 
 (defvar *html-translations* (make-hash-table :test #'eql))
 (setf (gethash #\< *html-translations*) "&lt;"

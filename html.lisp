@@ -5,30 +5,32 @@
 
 (defpackage html_pkg
   (:use "COMMON-LISP")
-  (:export "ANCHOR"
-     "BODY"
-     "BR"
-     "EM"
-     "ENCODE"
-     "H1"
-     "H2"
-     "H3"
-     "H4"
-     "HEAD"
-     "HR"
-     "HTML"
-     "IMG"
-     "LI"
-     "OL"
-     "P"
-     "SMALL"
-     "STRONG"
-     "TABLE"
-     "TITLE"
-     "TD"
-     "TH"
-     "TR"
-     "UL"))
+  (:export "a"
+     "link"
+     "body"
+     "br"
+     "em"
+     "encode"
+     "h1"
+     "h2"
+     "h3"
+     "h4"
+     "head"
+     "hr"
+     "html"
+     "img"
+     "li"
+     "ol"
+     "p"
+     "script"
+     "small"
+     "strong"
+     "table"
+     "title"
+     "td"
+     "th"
+     "tr"
+     "ul"))
 (in-package html_pkg)
 
 (defvar *html-translations* (make-hash-table :test #'eql))
@@ -42,24 +44,24 @@
 for HTML.  Return the new, safe, HTML string."
   (let ((html ""))
     (map nil #'(lambda (c)
-     (setq html (format nil "~A~A" html
+     (setq html (format nil "~a~a" html
             (gethash c *html-translations* c))))
    str)
     html))
 
 (defun tag-begin (tag attribs)
   (apply #'concatenate 'string
-   (append (list (format nil "<~A" tag))
+   (append (list (format nil "<~a" tag))
      (mapcar #'(lambda (pair)
            (format nil
-             " ~A=\"~A\""
+             " ~a=\"~a\""
              (car pair)
              (cdr pair)))
        attribs)
      (list ">"))))
 
 (defun tag-end (tag)
-  (format nil "</~A>" tag))
+  (format nil "</~a>" tag))
 
 (defun ensure-strings (lst)
   "Convert each element of LST to a string &
@@ -68,7 +70,7 @@ return a new list of the new strings."
         (typecase x
       (string x)
       (symbol (symbol-name x))
-      (t (format nil "~A" x))))
+      (t (format nil "~a" x))))
           lst))
 
 (defmacro defhtml-region (name &key
@@ -93,6 +95,7 @@ return a new list of the new strings."
 
 
 (defhtml-region a)
+(defhtml-region link)
 (defhtml-region body :prepend-newline t)
 (defhtml-region em)
 (defhtml-region h1 :prepend-newline t)
@@ -112,8 +115,8 @@ return a new list of the new strings."
 (defhtml-region th)
 (defhtml-region tr :prepend-newline t)
 (defhtml-region ul)
-
-(defun br () "<BR>")
-(defun hr () "<HR>")
-
+(defhtml-region script)
+(defun br () "<br>")
+(defun hr () "<hr>")
+(defun link (x y z) (format nil "<link rel='~a' type='~a' href='~a' />" x y z))
 ;;; --- end of file ---

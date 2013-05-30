@@ -5,32 +5,32 @@
 
 (defpackage html_pkg
   (:use "COMMON-LISP")
-  (:export "a"
-     "link"
-     "body"
-     "br"
-     "em"
-     "encode"
-     "h1"
-     "h2"
-     "h3"
-     "h4"
-     "head"
-     "hr"
-     "html"
-     "img"
-     "li"
-     "ol"
-     "p"
-     "script"
-     "small"
-     "strong"
-     "table"
-     "title"
-     "td"
-     "th"
-     "tr"
-     "ul"))
+  (:export "A"
+     "LINK"
+     "BODY"
+     "BR"
+     "EM"
+     "ENCODE"
+     "H1"
+     "H2"
+     "H3"
+     "H4"
+     "HEAD"
+     "HR"
+     "HTML"
+     "IMG"
+     "LI"
+     "OL"
+     "P"
+     "SCRIPT"
+     "SMALL"
+     "STRONG"
+     "TABLE"
+     "TITLE"
+     "TD"
+     "TH"
+     "TR"
+     "UL"))
 (in-package html_pkg)
 
 (defvar *html-translations* (make-hash-table :test #'eql))
@@ -44,24 +44,24 @@
 for HTML.  Return the new, safe, HTML string."
   (let ((html ""))
     (map nil #'(lambda (c)
-     (setq html (format nil "~a~a" html
+     (setq html (format nil "~A~A" html
             (gethash c *html-translations* c))))
    str)
     html))
 
 (defun tag-begin (tag attribs)
   (apply #'concatenate 'string
-   (append (list (format nil "<~a" tag))
+   (append (list (format nil "<~A" tag))
      (mapcar #'(lambda (pair)
            (format nil
-             " ~a=\"~a\""
+             " ~A=\"~A\""
              (car pair)
              (cdr pair)))
        attribs)
      (list ">"))))
 
 (defun tag-end (tag)
-  (format nil "</~a>" tag))
+  (format nil "</~A>" tag))
 
 (defun ensure-strings (lst)
   "Convert each element of LST to a string &
@@ -70,7 +70,7 @@ return a new list of the new strings."
         (typecase x
       (string x)
       (symbol (symbol-name x))
-      (t (format nil "~a" x))))
+      (t (format nil "~A" x))))
           lst))
 
 (defmacro defhtml-region (name &key

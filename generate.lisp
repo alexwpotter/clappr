@@ -1,0 +1,13 @@
+(load "html.lisp")
+(use-package 'html_pkg)
+(setf items(list "a" "body" "h1" "h2" "h3" "h4" "head" "html" "p" "strong" "title" "br" "hr"))
+(setf cont "Hello, world!")
+(defparameter content "")
+(defun gen_cont (len)
+(loop for i from 1 to len do 
+	(append (nth (random (- (list-length items) 1)) items ) content)
+	)
+)
+(gen_cont 10)
+(setf file (format nil "(html ~a )" content)
+(print file)

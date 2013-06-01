@@ -4,7 +4,7 @@
 (setf items(list "a" "h1" "h2" "h3" "h4" "p" "strong" "br" "hr"))
 
 (setf cont "Hello, world!")
-
+(setf *random-state* (make-random-state t))
 (setf content (list ""))
 
 (defun gen_cont (len)

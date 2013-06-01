@@ -5,7 +5,7 @@
 
 (setf cont "Hello, world!")
 (setf *random-state* (make-random-state t))
-(setf content (list ""))
+(setf content (list))
 
 (defun gen_cont (len)
 (loop for i from 1 to len do 

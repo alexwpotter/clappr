@@ -9,7 +9,7 @@
 
 (defun gen_cont (len)
 (loop for i from 1 to len do 
-	(append (list (elt items (random (length items)))) content)
+	(cons (list (elt items (random (length items)))) content)
 	)
 )
 (gen_cont 10)

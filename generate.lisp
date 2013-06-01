@@ -13,5 +13,5 @@
 	)
 )
 (gen_cont 10)
-(setf file (format nil "(html ~a )" (concatenate 'string content)))
+(setf file (format nil "(html ~a )" content))
 (print file)

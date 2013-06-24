@@ -15,6 +15,7 @@
   (princ line stream)
   (princ (code-char 13) stream)  ;; carriage-return
   (princ (code-char 10) stream)) ;; linefeed
+  
 (defun req-a (script)
 	(let ((fi (open script)))
 		(read fi)

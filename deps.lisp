@@ -5,7 +5,7 @@
 
 (defun req-h (file)
 	(let ((f (open file)))
-		(eval (read f))
+		(eval f)
 	)
 )
 
